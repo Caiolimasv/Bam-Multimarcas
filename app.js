@@ -221,11 +221,15 @@ sacola.forEach((item, index) => {
             onerror="this.src='Imagens/sem-foto.png'">
 
         <div class="item-info">
-
+        
             <div class="item-nome">${item.nome}</div>
-            <div class="item-tamanho">TAMANHO: ${item.tamanho}</div>
-            <div class="item-preco">1 x R$ 
-            R$ ${item.preco.toFixed(2).replace(".", ",")}
+            
+            <div class="item-tamanho">
+            TAMANHO: ${item.tamanho}
+            </div>
+            
+            <div class="item-preco">
+            1 x R$ ${item.preco.toFixed(2).replace(".", ",")}
             </div>
 
             <button
@@ -233,7 +237,9 @@ sacola.forEach((item, index) => {
                 onclick="removerItem(${index})">
                 🗑 Remover
             </button>
+            
         </div>
+        
     </div>
     `;
 });
