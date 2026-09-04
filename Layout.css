@@ -284,15 +284,8 @@ body {
 .item-carrinho{
     display:flex;
     gap:15px;
-    padding:20px 0;
+    padding:15px 0;
     border-bottom:1px solid #ddd;
-}
-
-.item-carrinho img{
-    width:70px;
-    height:70px;
-    object-fit:cover;
-    border-radius:8px;
 }
 
 .item-info{
@@ -300,11 +293,11 @@ body {
 }
 
 .item-nome{
-    font-size:15px;
+    font-size:14px;
     font-weight:700;
     text-transform:uppercase;
     line-height:1.4;
-    margin-bottom:10px;
+    margin-bottom:8px;
 }
 
 .item-preco{
@@ -332,6 +325,14 @@ body {
     color:red;
 }
 
+.item-foto{
+    width:80px;
+    height:100px;
+    object-fit:cover;
+    border-radius:4px;
+    flex-shrink:0;
+}
+
 /*/////////////////// Conteiner com tipos de pagamentos ///////////////////////*/
 
 #tipopagamento{
@@ -353,7 +354,7 @@ body {
 }
 
 #cart-total{
-    font-size:24px;
+    font-size:20px;
     font-weight:700;
 }
 
