@@ -137,7 +137,8 @@ function renderizarProdutos(produtos) {
                         '${prod.nome}',
                         '${prod.marca}',
                         'size-${index}',
-                        ${prod.preco}
+                        ${prod.preco},
+                        '${prod.foto}'
                     )">
                     Adicionar à Sacola
                 </button>
@@ -151,7 +152,8 @@ function adicionarAoCarrinho(
     nome,
     marca,
     sizeId,
-    preco
+    preco,
+    foto
 ) {
 
     const tamanho =
@@ -161,7 +163,8 @@ function adicionarAoCarrinho(
         nome,
         marca,
         tamanho,
-        preco
+        preco,
+        foto
     });
 
     atualizarSacola();
@@ -200,9 +203,7 @@ function atualizarSacola() {
     }
 
     function removerItem(index){
-
     sacola.splice(index, 1);
-
     atualizarSacola();
 }
 
@@ -215,8 +216,7 @@ function atualizarSacola() {
         listaCarrinho.innerHTML += `
             <div class="item-carrinho">
 
-                <img src="../Imagens/sem
-                <div class="item-info">
+                <img src="${item.foto}"class="item-info">
 
                     <div class="item-nome">
                         ${item.nome}
