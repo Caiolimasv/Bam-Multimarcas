@@ -10,12 +10,12 @@
 
 <body>
     
-    <div class="topbar"> 🚚 Frete grátis para compras acima de R$ 199 </div>
+    <div class="topbar"> 🚚 Frete grátis para compras acima de R$ x </div>
 
     <header class="header" >
 
         <div class="logo">
-            <img src="Imagens/logo.png">
+            <img src="../Imagens/logo.png">
         </div>
 
         <div class="Barradepesquisa">
@@ -24,8 +24,8 @@
         </div>
 
         <div class="iconecarrinho" onclick="abrirCarrinho()">
-            <img src="Imagens/icons8-carrinho-de-compras-24.png">
-            <span class="contagemitens">0</span>
+            <img src="../Imagens/icons8-carrinho-de-compras-24.png">
+            <span id="contagemitens" class="contagemitens">0</span>
         </div>
 
     </header>
@@ -44,21 +44,26 @@
             <button onclick="fecharCarrinho()">X</button>
         </div>
 
+        <div id="lista-carrinho">
+
         <div class="carrinho-vazio">
             <div class="vazio-icon">🛍️</div>
                 <h3>Seu carrinho está vazio</h3>
             <p>Adicione produtos para iniciar sua compra.</p>
         </div>
 
+        </div>
+
         <div id="tipopagamento">
 
         <div class="cart-info">
+            <button class="limparcarrinho" > Limpar </button>
             <span id="cart-count">0 item(ns)</span>
             <span id="cart-total">R$ 0,00</span>
         </div>
 
         <div style="display:flex;flex-direction:column;gap:8px;">
-
+            
             <button
                 onclick="pagarComPixDireto()"
                 class="btn-pix">
@@ -90,6 +95,36 @@
     </div>
 
     <script src="app.js"></script>
+
+    <footer class="footer">
+    <div class="footer-container">
+
+        <div class="footer-col">
+            <h3>BAM MULTIMARCAS</h3>
+            <p>Moda com estilo, qualidade e praticidade para o seu dia a dia.</p>
+        </div>
+
+        <div class="footer-col">
+            <h4>Contato</h4>
+            <p>📞 (27) 99999-9999</p>
+            <p>✉️ contato@lojabam.com</p>
+            <p>📍 Vitória - ES</p>
+        </div>
+
+        <div class="footer-col">
+            <h4>Redes Sociais</h4>
+            <div class="social-icons">
+                <a href="#">📷 Instagram</a>
+                <a href="#">📘 Facebook</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 BAM MULTIMARCAS - Todos os direitos reservados.
+    </div>
+</footer>
 
 </body>
 </html>
