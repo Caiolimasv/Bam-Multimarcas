@@ -202,11 +202,6 @@ function atualizarSacola() {
         return;
     }
 
-    function removerItem(index){
-    sacola.splice(index, 1);
-    atualizarSacola();
-}
-
     carrinhoVazio.style.display = "none";
 
     listaCarrinho.innerHTML = "";
@@ -215,35 +210,42 @@ function atualizarSacola() {
 
         listaCarrinho.innerHTML += `
             <div class="item-carrinho">
-
-                <img src="${item.foto}"class="item-info">
-
-                    <div class="item-nome">
-                        ${item.nome}
+            
+                <img
+                    src="${item.foto}"
+                    alt="${item.nome}"
+                    class="item-foto">
+            
+                <div class="item-info">
+            
+                    <div class="item-tem-tamanho">
+                        TAMANHO: ${item.tamanho}
                     </div>
-
-                    <div class="item-tamanho">
-                        Tamanho: ${item.tamanho}
-                    </div>
-
+            
                     <div class="item-preco">
                         R$ ${item.preco.toFixed(2).replace(".", ",")}
                     </div>
-
+            
+                    <button
+                        class="btn-remover"
+                        onclick="removerItem(${index})">
+            
+                        🗑 Remover
+            
+                    </button>
+            
                 </div>
-
-                <button
-                    class="btn-remover"
-                    onclick="removerItem(${index})">
-                    🗑️
-                </button>
-
+            
             </div>
-        `;
+            `;
     });
 
 }
 
+function removerItem(index){
+    sacola.splice(index, 1);
+    atualizarSacola();
+}
 
 async function pagarComPixDireto() {
 
