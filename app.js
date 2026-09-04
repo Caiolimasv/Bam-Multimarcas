@@ -115,7 +115,11 @@ function renderizarProdutos(produtos) {
             .join("");
         const cardHTML = `
             <div class="product-card">
-                ${prod.foto}
+                <img
+                src="${prod.foto}"
+                alt="${prod.nome}"
+                class="product-img"
+                onerror="
                 <div class="product-title">
                     ${prod.nome}
                 </div>
@@ -212,13 +216,18 @@ function atualizarSacola() {
             <div class="item-carrinho">
             
                 <img
-                    src="${item.foto}"
-                    alt="${item.nome}"
-                    class="item-foto">
+                src="${item.foto}"
+                alt="${item.nome}"
+                class="item-foto"
+                onerror="this.src='../Imagens/sem-foto.png'">
             
                 <div class="item-info">
             
-                    <div class="item-tem-tamanho">
+                    <div class="item-nome">
+                        1 X ${item.nome}
+                    </div>
+            
+                    <div class="item-tamanho">
                         TAMANHO: ${item.tamanho}
                     </div>
             
@@ -339,8 +348,6 @@ function enviarWhatsApp() {
 
 }
 
-carregarProdutos();
-
 /*/Abrir e fechar o carrinho na lateral/*/
 
 function abrirCarrinho() {
@@ -352,6 +359,10 @@ function fecharCarrinho() {
 document.getElementById("carrinho").classList.remove("active");
 document.getElementById("overlay").classList.remove("active");
 }
+
+
+carregarProdutos();
+
 
 /*/Controle de abas /*/
 
