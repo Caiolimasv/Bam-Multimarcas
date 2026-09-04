@@ -419,16 +419,13 @@ h1 {
 }
 
 #products-container {
-    
     flex: 1;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 20px;
-    max-width: 1000px;
-    width: 100%;
+    max-width: 1200px;
     margin: 20px auto;
-    padding: 0 20px;
-    box-sizing: border-box;
+    padding: 20px;
 }
 
 .product-card {
