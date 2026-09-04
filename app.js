@@ -222,24 +222,20 @@ sacola.forEach((item, index) => {
 
         <div class="item-info">
 
-            <div class="item-nome">
-            1 X $ <div class="item-preco">
+            <div class="item-nome">${item.nome}</div>
+            <div class="item-tamanho">TAMANHO: ${item.tamanho}</div>
+            <div class="item-preco">1 x R$ 
             R$ ${item.preco.toFixed(2).replace(".", ",")}
             </div>
 
             <button
                 class="btn-remover"
                 onclick="removerItem(${index})">
-
                 🗑 Remover
-
             </button>
-
         </div>
-
     </div>
     `;
-
 });
 
 listaCarrinho.innerHTML = html;
