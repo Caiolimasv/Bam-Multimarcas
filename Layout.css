@@ -283,13 +283,9 @@ body {
 
 .item-carrinho{
     display:flex;
-    align-items:center;
-    gap:12px;
-    padding:12px;
-    background:#fff;
-    border-radius:12px;
-    border:1px solid #eee;
-    margin-bottom:10px;
+    gap:15px;
+    padding:20px 0;
+    border-bottom:1px solid #ddd;
 }
 
 .item-carrinho img{
@@ -304,28 +300,32 @@ body {
 }
 
 .item-nome{
-    font-weight:600;
-    margin-bottom:5px;
+    font-size:15px;
+    font-weight:700;
+    text-transform:uppercase;
+    line-height:1.4;
+    margin-bottom:10px;
 }
 
 .item-preco{
-    margin-top:5px;
-    font-size:16px;
-    color:#111;
+    font-size:18px;
     font-weight:700;
+    margin-bottom:12px;
 }
 
 .item-tamanho{
     font-size:13px;
     color:#777;
+    margin-bottom:15px;
 }
 
 .btn-remover{
     border:none;
     background:none;
-    font-size:20px;
+    color:#999;
     cursor:pointer;
-    color:#888;
+    padding:0;
+    font-size:14px;
 }
 
 .btn-remover:hover{
