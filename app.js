@@ -222,11 +222,9 @@ sacola.forEach((item, index) => {
 
         <div class="item-info">
 
-            <div classho}
-            </div>
-
-            <div class="item-preco">
-                R$ ${item.preco.toFixed(2).replace(".", ",")}
+            <div class="item-nome">
+            1 X $ <div class="item-preco">
+            R$ ${item.preco.toFixed(2).replace(".", ",")}
             </div>
 
             <button
