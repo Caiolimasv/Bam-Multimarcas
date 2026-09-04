@@ -7,7 +7,7 @@ let sacola = [];
 
 function formatarUrlImagem(url) {
     if (!url || url.trim() === "") {
-        return "https://via.placeholder.com/300x220?text=Sem+Foto";
+        return "Imagens/sem-foto.png";
     }
     url = url.trim();
     if (url.includes("drive.google.com")) {
@@ -115,17 +115,13 @@ function renderizarProdutos(produtos) {
             .join("");
         const cardHTML = `
             <div class="product-card">
+            
                 <img
                 src="${prod.foto}"
                 alt="${prod.nome}"
                 class="product-img"
-                onerror="
-                <div class="product-title">
-                    ${prod.nome}
-                </div>
-                <div class="product-brand">
-                    ${prod.marca}
-                </div>
+                onerror="this.src='imagens/sem-foto.png'">
+                
                 <div class="product-price">
                     R$ ${prod.preco.toFixed(2).replace(".", ",")}
                 </div>
@@ -210,49 +206,55 @@ function atualizarSacola() {
 
     listaCarrinho.innerHTML = "";
 
-    sacola.forEach((item, index) => {
+    
+    let html = "";
 
-        listaCarrinho.innerHTML += `
-            <div class="item-carrinho">
-            
-                <img
-                src="${item.foto}"
-                alt="${item.nome}"
-                class="item-foto"
-                onerror="this.src='../Imagens/sem-foto.png'">
-            
-                <div class="item-info">
-            
-                    <div class="item-nome">
-                        1 X ${item.nome}
-                    </div>
-            
-                    <div class="item-tamanho">
-                        TAMANHO: ${item.tamanho}
-                    </div>
-            
-                    <div class="item-preco">
-                        R$ ${item.preco.toFixed(2).replace(".", ",")}
-                    </div>
-            
-                    <button
-                        class="btn-remover"
-                        onclick="removerItem(${index})">
-            
-                        🗑 Remover
-            
-                    </button>
-            
-                </div>
-            
+sacola.forEach((item, index) => {
+
+    html += `
+    <div class="item-carrinho">
+
+        <img
+            src="${item.foto}"
+            alt="${item.nome}"
+            class="item-foto"
+            onerror="this.src='Imagens/sem-foto.png'">
+
+        <div class="item-info">
+
+            <div classho}
             </div>
-            `;
-    });
+
+            <div class="item-preco">
+                R$ ${item.preco.toFixed(2).replace(".", ",")}
+            </div>
+
+            <button
+                class="btn-remover"
+                onclick="removerItem(${index})">
+
+                🗑 Remover
+
+            </button>
+
+        </div>
+
+    </div>
+    `;
+
+});
+
+listaCarrinho.innerHTML = html;
 
 }
 
 function removerItem(index){
     sacola.splice(index, 1);
+    atualizarSacola();
+}
+
+function limparCarrinho(){
+    sacola = [];
     atualizarSacola();
 }
 
