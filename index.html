@@ -36,7 +36,8 @@
         <a href="#">Feminino</a>
         <a href="#">Promoções</a>
     </nav>
-
+    
+    <div id="overlay" class="overlay" onclick="fecharCarrinho()"></div>
     <div class="carrinho-lateral" id="carrinho" >
 
         <div class="carrinho-header">
@@ -44,7 +45,7 @@
             <button onclick="fecharCarrinho()">X</button>
         </div>
 
-        <div id="lista-carrinho">
+        <div id="lista-carrinho"></div>
 
         <div class="carrinho-vazio">
             <div class="vazio-icon">🛍️</div>
@@ -52,12 +53,10 @@
             <p>Adicione produtos para iniciar sua compra.</p>
         </div>
 
-        </div>
-
         <div id="tipopagamento">
 
         <div class="cart-info">
-            <button class="limparcarrinho" > Limpar </button>
+            <button class="limparcarrinho" onclick="limparCarrinho()"> Limpar </button>
             <span id="cart-count">0 item(ns)</span>
             <span id="cart-total">R$ 0,00</span>
         </div>
