@@ -283,12 +283,13 @@ body {
 
 .item-carrinho{
     display:flex;
+    align-items:center;
     gap:12px;
     padding:12px;
-    margin-bottom:12px;
     background:#fff;
-    border-radius:10px;
+    border-radius:12px;
     border:1px solid #eee;
+    margin-bottom:10px;
 }
 
 .item-carrinho img{
@@ -308,6 +309,8 @@ body {
 }
 
 .item-preco{
+    margin-top:5px;
+    font-size:16px;
     color:#111;
     font-weight:700;
 }
@@ -322,7 +325,7 @@ body {
     background:none;
     font-size:20px;
     cursor:pointer;
-    color:#999;
+    color:#888;
 }
 
 .btn-remover:hover{
