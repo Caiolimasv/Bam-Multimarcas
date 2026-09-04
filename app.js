@@ -6,154 +6,106 @@ const urlPlanilha =
 let sacola = [];
 
 function formatarUrlImagem(url) {
-
     if (!url || url.trim() === "") {
-
         return "https://via.placeholder.com/300x220?text=Sem+Foto";
-
     }
-
     url = url.trim();
-
     if (url.includes("drive.google.com")) {
-
         const idMatch = url.match(/[-\w]{25,}/);
-
         if (idMatch) {
-
             return `https://drive.google.com/uc?export=view&id=${idMatch[0]}`;
-
         }
-
     }
-
     return url;
 }
 
-async function carregarProdutos() {
-
-    try {
-
-        const response =
-            await fetch(
-                urlPlanilha +
-                "&nocache=" +
-                new Date().getTime()
-            );
-
-        const data = await response.text();
-
-        const linhas =
-            data
-            .split("\n")
-            .map(r => r.trim())
-            .filter(r => r.length > 0);
-
-        const produtos = [];
-
-        for (let i = 1; i < linhas.length; i++) {
-
-            const colunas =
-                linhas[i]
-                .split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/)
-                .map(c =>
-                    c.replace(/^"|"$/g, "").trim()
+async function carregarProdutos() 
+    {
+        try {
+            const response =
+                await fetch(
+                    urlPlanilha +
+                    "&nocache=" +
+                    new Date().getTime()
                 );
-
-            if (colunas.length >= 2) {
-
-                const id = colunas[0] || i;
-                const nome = colunas[1] || "";
-                const marca = colunas[2] || "";
-
-                if (!nome) continue;
-
-                let precoNum = 0;
-
-                if (colunas[3]) {
-
-                    const precoLimpo =
-                        colunas[3]
-                        .replace("R$", "")
-                        .replace(".", "")
-                        .replace(",", ".")
-                        .trim();
-
-                    precoNum = parseFloat(precoLimpo) || 0;
-
+            const data = await response.text();
+            const linhas =
+                data
+                .split("\n")
+                .map(r => r.trim())
+                .filter(r => r.length > 0);
+            const produtos = [];
+            for (let i = 1; i < linhas.length; i++) {
+                const colunas =
+                    linhas[i]
+                    .split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/)
+                    .map(c =>
+                        c.replace(/^"|"$/g, "").trim()
+                    );
+                if (colunas.length >= 2) {
+                    const id = colunas[0] || i;
+                    const nome = colunas[1] || "";
+                    const marca = colunas[2] || "";
+                    if (!nome) continue;
+                    let precoNum = 0;
+                    if (colunas[3]) {
+                        const precoLimpo =
+                            colunas[3]
+                            .replace("R$", "")
+                            .replace(".", "")
+                            .replace(",", ".")
+                            .trim();
+                        precoNum = parseFloat(precoLimpo) || 0;
+                    }
+                    const tamanhoP = parseInt(colunas[4]) || 0;
+                    const tamanhoM = parseInt(colunas[5]) || 0;
+                    const tamanhoG = parseInt(colunas[6]) || 0;
+                    const tamanhoGG = parseInt(colunas[7]) || 0;
+                    let tamanhosArr = [];
+                    if (tamanhoP > 0) tamanhosArr.push("P");
+                    if (tamanhoM > 0) tamanhosArr.push("M");
+                    if (tamanhoG > 0) tamanhosArr.push("G");
+                    if (tamanhoGG > 0) tamanhosArr.push("GG");
+                    if(tamanhosArr.length === 0) {
+                        tamanhosArr.push("único");
+                    }
+                    const foto = formatarUrlImagem(colunas[8]);
+                    const categoria = colunas[9] || "";
+                    const subcategoria = colunas[10] || "";
+                    const estoque = parseInt(colunas[11]) || 0;
+                    const destaque = colunas[12] || "";
+                    produtos.push({
+                        id,
+                        nome,
+                        marca,
+                        preco: precoNum,
+                        tamanhos: tamanhosArr,
+                        foto,
+                        categoria,
+                        subcategoria,
+                        estoque,
+                        destaque
+                    });
                 }
-
-                const tamanhoP = parseInt(colunas[4]) || 0;
-                const tamanhoM = parseInt(colunas[5]) || 0;
-                const tamanhoG = parseInt(colunas[6]) || 0;
-                const tamanhoGG = parseInt(colunas[7]) || 0;
-
-                let tamanhosArr = [];
-
-                if (tamanhoP > 0) tamanhosArr.push("P");
-                if (tamanhoM > 0) tamanhosArr.push("M");
-                if (tamanhoG > 0) tamanhosArr.push("G");
-                if (tamanhoGG > 0) tamanhosArr.push("GG");
-
-                if(tamanhosArr.length === 0) {
-                    tamanhosArr.push("único");
-                }
-
-                const foto = formatarUrlImagem(colunas[8]);
-
-                const categoria = colunas[9] || "";
-                const subcategoria = colunas[10] || "";
-                const estoque = parseInt(colunas[11]) || 0;
-                const destaque = colunas[12] || "";
-                
-
-                produtos.push({
-
-                    id,
-                    nome,
-                    marca,
-                    preco: precoNum,
-                    tamanhos: tamanhosArr,
-                    foto,
-                    categoria,
-                    subcategoria,
-                    estoque,
-                    destaque
-
-                });
-
             }
-
+            renderizarProdutos(produtos);
         }
-
-        renderizarProdutos(produtos);
-
+        catch (error) {
+            console.error(
+                "Erro ao carregar produtos:",
+                error
+            );
+        }
     }
-
-    catch (error) {
-
-        console.error(
-            "Erro ao carregar produtos:",
-            error
-        );
-
-    }
-
-}
 
 function renderizarProdutos(produtos) {
-
     const container =
         document.getElementById(
             "products-container"
         );
-
     if (!container) return;
-
     container.innerHTML = "";
-
     produtos.forEach((prod, index) => {
-
         const tamanhosOptions =
             prod.tamanhos
             .map(
@@ -161,35 +113,24 @@ function renderizarProdutos(produtos) {
                 `<option value="${t}">${t}</option>`
             )
             .join("");
-
         const cardHTML = `
-
             <div class="product-card">
-
                 ${prod.foto}
-
                 <div class="product-title">
                     ${prod.nome}
                 </div>
-
                 <div class="product-brand">
                     ${prod.marca}
                 </div>
-
                 <div class="product-price">
                     R$ ${prod.preco.toFixed(2).replace(".", ",")}
                 </div>
-
                 <div class="select-group">
-
                     <label>Tamanho:</label>
-
                     <select id="size-${index}">
                         ${tamanhosOptions}
                     </select>
-
                 </div>
-
                 <button
                     class="btn-add"
                     onclick="adicionarAoCarrinho(
@@ -198,18 +139,12 @@ function renderizarProdutos(produtos) {
                         'size-${index}',
                         ${prod.preco}
                     )">
-
                     Adicionar à Sacola
-
                 </button>
-
             </div>
         `;
-
         container.innerHTML += cardHTML;
-
     });
-
 }
 
 function adicionarAoCarrinho(
@@ -235,24 +170,80 @@ function adicionarAoCarrinho(
 
 function atualizarSacola() {
 
+    const listaCarrinho =
+        document.getElementById("lista-carrinho");
+
+    const carrinhoVazio =
+        document.querySelector(".carrinho-vazio");
+
     const total =
         sacola.reduce(
-            (soma, item) =>
-                soma + item.preco,
+            (soma, item) => soma + item.preco,
             0
         );
 
-    document.getElementById(
-        "cart-count"
-    ).innerText =
+    document.getElementById("contagemitens").innerText =
+        sacola.length;
+
+    document.getElementById("cart-count").innerText =
         `${sacola.length} item(ns)`;
 
-    document.getElementById(
-        "cart-total"
-    ).innerText =
+    document.getElementById("cart-total").innerText =
         `R$ ${total.toFixed(2).replace(".", ",")}`;
 
+    if (sacola.length === 0) {
+
+        carrinhoVazio.style.display = "flex";
+        listaCarrinho.innerHTML = "";
+
+        return;
+    }
+
+    function removerItem(index){
+
+    sacola.splice(index, 1);
+
+    atualizarSacola();
 }
+
+    carrinhoVazio.style.display = "none";
+
+    listaCarrinho.innerHTML = "";
+
+    sacola.forEach((item, index) => {
+
+        listaCarrinho.innerHTML += `
+            <div class="item-carrinho">
+
+                <img src="../Imagens/sem
+                <div class="item-info">
+
+                    <div class="item-nome">
+                        ${item.nome}
+                    </div>
+
+                    <div class="item-tamanho">
+                        Tamanho: ${item.tamanho}
+                    </div>
+
+                    <div class="item-preco">
+                        R$ ${item.preco.toFixed(2).replace(".", ",")}
+                    </div>
+
+                </div>
+
+                <button
+                    class="btn-remover"
+                    onclick="removerItem(${index})">
+                    🗑️
+                </button>
+
+            </div>
+        `;
+    });
+
+}
+
 
 async function pagarComPixDireto() {
 
@@ -349,16 +340,19 @@ function enviarWhatsApp() {
 carregarProdutos();
 
 /*/Abrir e fechar o carrinho na lateral/*/
+
 function abrirCarrinho() {
 document.getElementById("carrinho").classList.add("active");
 document.getElementById("overlay").classList.add("active");
 }
+
 function fecharCarrinho() {
 document.getElementById("carrinho").classList.remove("active");
 document.getElementById("overlay").classList.remove("active");
 }
 
 /*/Controle de abas /*/
+
 const menuLinks = document.querySelectorAll('.menu a');
 menuLinks.forEach(link => {
 
