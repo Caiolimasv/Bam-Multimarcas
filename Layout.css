@@ -268,6 +268,7 @@ select:focus-visible {
     width: 390px;
     max-width: 100%;
     height: 100vh;
+    height: 100dvh;
     background: var(--card);
     transition: right .35s ease;
     z-index: 1999;
@@ -712,6 +713,17 @@ select:focus-visible {
         order: 2;
         margin-left: auto;
     }
+
+    .carrinho-lateral {
+        width: 100%;
+        right: -100%;
+        box-shadow: none;
+        border-left: none;
+    }
+
+    .carrinho-lateral.active {
+        right: 0;
+    }
 }
 
 @media (max-width: 900px) {
@@ -752,10 +764,6 @@ select:focus-visible {
 
     #products-container {
         grid-template-columns: repeat(2, 1fr);
-    }
-
-    .carrinho-lateral {
-        width: 100%;
     }
 
     .hero-title {
