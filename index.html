@@ -4,126 +4,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo Online</title>
+    <title>BAM Multimarcas — Catálogo Online</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="Layout.css">
 </head>
 
 <body>
-    
-    <div class="topbar"> 🚚 Frete grátis para compras acima de R$ x </div>
 
-    <header class="header" >
+    <div class="topbar">🚚 Frete grátis para compras acima de R$ x</div>
+
+    <header class="header">
 
         <div class="logo">
-            <img src="Imagens/logo.png">
+            <img src="Imagens/logo.png" alt="BAM Multimarcas">
         </div>
 
         <div class="Barradepesquisa">
-            <input type="text"
-            placeholder="Buscar produtos...">
+            <input type="text" placeholder="Buscar produtos...">
         </div>
 
-        <div class="iconecarrinho" onclick="abrirCarrinho()">
-            <img src="Imagens/icons8-carrinho-de-compras-24.png">
+        <div class="iconecarrinho" onclick="abrirCarrinho()" role="button" aria-label="Abrir carrinho" tabindex="0">
+            <img src="Imagens/icons8-carrinho-de-compras-24.png" alt="">
             <span id="contagemitens" class="contagemitens">0</span>
         </div>
 
     </header>
 
     <nav class="menu">
-        <a href="#">Início</a>
+        <a href="#" class="active">Início</a>
         <a href="#">Masculino</a>
         <a href="#">Feminino</a>
         <a href="#">Promoções</a>
     </nav>
-    
+
     <div id="overlay" class="overlay" onclick="fecharCarrinho()"></div>
-    <div class="carrinho-lateral" id="carrinho" >
+
+    <div class="carrinho-lateral" id="carrinho">
 
         <div class="carrinho-header">
             <h2>Meu Carrinho</h2>
-            <button onclick="fecharCarrinho()">X</button>
+            <button onclick="fecharCarrinho()" aria-label="Fechar carrinho">✕</button>
         </div>
 
         <div id="lista-carrinho"></div>
 
         <div class="carrinho-vazio">
             <div class="vazio-icon">🛍️</div>
-                <h3>Seu carrinho está vazio</h3>
+            <h3>Seu carrinho está vazio</h3>
             <p>Adicione produtos para iniciar sua compra.</p>
         </div>
 
         <div id="tipopagamento">
 
-        <div class="cart-info">
-            <button class="limparcarrinho" onclick="limparCarrinho()"> Limpar </button>
-            <span id="cart-count">0 item(ns)</span>
-            <span id="cart-total">R$ 0,00</span>
-        </div>
+            <div class="cart-info">
+                <button class="limparcarrinho" onclick="limparCarrinho()">Limpar</button>
+                <span id="cart-count">0 item(ns)</span>
+                <span id="cart-total">R$ 0,00</span>
+            </div>
 
-        <div style="display:flex;flex-direction:column;gap:8px;">
-            
-            <button
-                onclick="pagarComPixDireto()"
-                class="btn-pix">
+            <div style="display:flex;flex-direction:column;gap:8px;">
 
-                ⚡ Pagar via Pix no Site
+                <button onclick="pagarComPixDireto()" class="btn-pix">
+                    ⚡ Pagar via Pix no Site
+                </button>
 
-            </button>
+                <button onclick="enviarWhatsApp()" class="btn-whatsapp">
+                    📲 Finalizar no WhatsApp
+                </button>
 
-            <button
-                onclick="enviarWhatsApp()"
-                class="btn-whatsapp">
-
-                📲 Finalizar no WhatsApp
-
-            </button>
+            </div>
 
         </div>
 
     </div>
 
-    </div>
+    <section class="hero">
+        <div class="hero-inner">
+            <h1 class="hero-title">Marcas que você já ama, num só lugar.</h1>
+            <p class="hero-subtitle">Curadoria de moda masculina e feminina com entrega rápida e finalização direto no Pix ou WhatsApp.</p>
+        </div>
+    </section>
 
-    <h1>Catálogo de Produtos</h1>
+    <div class="catalogo-header">
+        <h2>Catálogo</h2>
+    </div>
 
     <div id="products-container">
-        <p style="text-align:center;grid-column:1/-1;">
-            Carregando produtos...
-        </p>
+        <p class="loading-text">Carregando produtos...</p>
     </div>
 
     <script src="app.js"></script>
 
     <footer class="footer">
-    <div class="footer-container">
+        <div class="footer-container">
 
-        <div class="footer-col">
-            <h3>BAM MULTIMARCAS</h3>
-            <p>Moda com estilo, qualidade e praticidade para o seu dia a dia.</p>
-        </div>
-
-        <div class="footer-col">
-            <h4>Contato</h4>
-            <p>📞 (27) 99999-9999</p>
-            <p>✉️ contato@lojabam.com</p>
-            <p>📍 Vitória - ES</p>
-        </div>
-
-        <div class="footer-col">
-            <h4>Redes Sociais</h4>
-            <div class="social-icons">
-                <a href="#">📷 Instagram</a>
-                <a href="#">📘 Facebook</a>
+            <div class="footer-col">
+                <h3>BAM MULTIMARCAS</h3>
+                <p>Moda com estilo, qualidade e praticidade para o seu dia a dia.</p>
             </div>
+
+            <div class="footer-col">
+                <h4>Contato</h4>
+                <p>📞 (27) 99736-7867 </p>
+                <p>📍 Vitória - ES</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>Redes Sociais</h4>
+                <div class="social-icons">
+                    <a href="https://www.instagram.com/bammultimarcas/">📷 Instagram</a>
+                </div>
+            </div>
+
         </div>
 
-    </div>
-
-    <div class="footer-bottom">
-        © 2026 BAM MULTIMARCAS - Todos os direitos reservados.
-    </div>
-</footer>
+        <div class="footer-bottom">
+            © 2026 BAM MULTIMARCAS - Todos os direitos reservados.
+        </div>
+    </footer>
 
 </body>
 </html>
