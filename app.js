@@ -360,11 +360,13 @@ function enviarWhatsApp() {
 function abrirCarrinho() {
 document.getElementById("carrinho").classList.add("active");
 document.getElementById("overlay").classList.add("active");
+document.body.style.overflow = "hidden";
 }
 
 function fecharCarrinho() {
 document.getElementById("carrinho").classList.remove("active");
 document.getElementById("overlay").classList.remove("active");
+document.body.style.overflow = "";
 }
 
 /*/Permitir abrir o carrinho pelo teclado (Enter/Espaço) já que o ícone virou um "role=button"/*/
