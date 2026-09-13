@@ -115,13 +115,18 @@ function renderizarProdutos(produtos) {
             .join("");
         const cardHTML = `
             <div class="product-card">
-            
+
                 <img
                 src="${prod.foto}"
                 alt="${prod.nome}"
                 class="product-img"
-                onerror="this.src='imagens/sem-foto.png'">
-                
+                onerror="this.src='Imagens/sem-foto.png'">
+
+                <div class="product-info">
+                    ${prod.marca ? `<div class="product-brand">${prod.marca}</div>` : ""}
+                    <div class="product-title">${prod.nome}</div>
+                </div>
+
                 <div class="product-price">
                     R$ ${prod.preco.toFixed(2).replace(".", ",")}
                 </div>
@@ -360,6 +365,18 @@ document.getElementById("overlay").classList.add("active");
 function fecharCarrinho() {
 document.getElementById("carrinho").classList.remove("active");
 document.getElementById("overlay").classList.remove("active");
+}
+
+/*/Permitir abrir o carrinho pelo teclado (Enter/Espaço) já que o ícone virou um "role=button"/*/
+
+const iconeCarrinhoEl = document.querySelector(".iconecarrinho");
+if (iconeCarrinhoEl) {
+    iconeCarrinhoEl.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            abrirCarrinho();
+        }
+    });
 }
 
 
